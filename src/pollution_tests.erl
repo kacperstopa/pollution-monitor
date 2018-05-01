@@ -9,7 +9,7 @@
 -module(pollution_tests).
 -author("kacper").
 
--import(pollution, [createMonitor/0, addStation/3, addValue/5, removeValue/4, getOneValue/4, getStationMean/3, getDailyMean/3, getDayTypeMeasurements/3, maximum/1, minimum/1, getMinMaxValue/4]).
+-import(pollution, [createMonitor/0, addStation/3, addValue/5, removeValue/4, getOneValue/4, getStationMean/3, getDailyMean/3, getMinMaxValue/4]).
 
 -include_lib("eunit/include/eunit.hrl").
 

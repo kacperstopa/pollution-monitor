@@ -10,7 +10,7 @@
 -author("kacper").
 
 %% API
--export([createMonitor/0, addStation/3, addValue/5, removeValue/4, getOneValue/4, getStationMean/3, getDailyMean/3, getDayTypeMeasurements/3, maximum/1, minimum/1, getMinMaxValue/4]).
+-export([createMonitor/0, addStation/3, addValue/5, removeValue/4, getOneValue/4, getStationMean/3, getDailyMean/3, getMinMaxValue/4]).
 
 
 -record(station, {name, location, measurements=[]}).
