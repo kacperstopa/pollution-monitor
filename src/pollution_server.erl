@@ -12,7 +12,7 @@
 -import(pollution, [createMonitor/0, addStation/3, addValue/5, removeValue/4, getOneValue/4, getStationMean/3, getDailyMean/3, getDayTypeMeasurements/3, maximum/1, minimum/1, getMinMaxValue/4]).
 
 %% API
--export([start/0, init/0, addStation/2, getMonitor/0, addValue/4, removeValue/3, getOneValue/3, getStationMean/2, getDailyMean/2, getMinMaxValue/3, stop/0]).
+-export([start/0, init/0, addStation/2, getMonitor/0, addValue/4, removeValue/3, getOneValue/3, getStationMean/2, getDailyMean/2, getMinMaxValue/3, stop/0, crash/0]).
 
 start() ->
   register(pollutionServer, spawn(pollution_server, init, [])).
@@ -54,6 +54,9 @@ getDailyMean(Type, Day) ->
 getMinMaxValue(Type, Day, Location) ->
   call(getMinMaxValue, {Type, Day, Location}).
 
+crash() ->
+  pollutionServer ! crash.
+
 loop(Monitor) ->
   receive
     {request, Pid, addStation, {Name, Location}} ->
@@ -81,6 +84,7 @@ loop(Monitor) ->
       Pid ! {reply, pollution:getMinMaxValue(Type, Day, Location, Monitor)},
       loop(Monitor);
     {request, Pid, stop, {}} ->
-      Pid ! {reply, ok}
+      Pid ! {reply, ok};
+    crash -> 1/0
   end.
 
